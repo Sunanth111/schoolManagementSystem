@@ -29,6 +29,167 @@
                     <button type="submit" class="btn btn-primary">Sign In</button>
                 </form>
                 <div id="loginError" class="error-message"></div>
+                <div class="login-footer">
+                    <p>Don't have an account? <a href="#" id="showSignup">Sign Up</a></p>
+                    <p>New School? <a href="#" id="showSchoolRegistration">Register School</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- School Registration Page -->
+    <div id="schoolRegistrationPage" class="page">
+        <div class="login-container">
+            <div class="login-card" style="max-width: 600px;">
+                <div class="login-header">
+                    <i class="fas fa-school"></i>
+                    <h1>Register Your School</h1>
+                    <p>Create your school account</p>
+                </div>
+                <form id="schoolRegistrationForm">
+                    <h3>School Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>School Name *</label>
+                            <input type="text" id="schoolName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>School Type</label>
+                            <select id="schoolType">
+                                <option value="Public">Public</option>
+                                <option value="Private">Private</option>
+                                <option value="International">International</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="schoolEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone *</label>
+                            <input type="text" id="schoolPhone" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" id="schoolAddress">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" id="schoolCity">
+                        </div>
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" id="schoolState">
+                        </div>
+                        <div class="form-group">
+                            <label>Country</label>
+                            <input type="text" id="schoolCountry">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Principal Name</label>
+                            <input type="text" id="principalName">
+                        </div>
+                        <div class="form-group">
+                            <label>Principal Email</label>
+                            <input type="email" id="principalEmail">
+                        </div>
+                    </div>
+                    <h3>Admin Account</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name *</label>
+                            <input type="text" id="adminFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name *</label>
+                            <input type="text" id="adminLastName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" id="adminEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password *</label>
+                            <input type="password" id="adminPassword" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register School</button>
+                    <button type="button" class="btn btn-secondary" id="backToLoginFromSchool">Back to Login</button>
+                </form>
+                <div id="schoolRegistrationError" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signupPage" class="page">
+        <div class="login-container">
+            <div class="login-card" style="max-width: 500px;">
+                <div class="login-header">
+                    <i class="fas fa-user-plus"></i>
+                    <h1>Create Account</h1>
+                    <p>Sign up for your account</p>
+                </div>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label>School Code *</label>
+                        <input type="text" id="signupSchoolCode" placeholder="Enter your school code" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Role *</label>
+                        <select id="signupRole" required>
+                            <option value="">Select Role</option>
+                            <option value="STUDENT">Student</option>
+                            <option value="TEACHER">Teacher</option>
+                            <option value="PARENT">Parent</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name *</label>
+                            <input type="text" id="signupFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name *</label>
+                            <input type="text" id="signupLastName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password *</label>
+                        <input type="password" id="signupPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" id="signupPhone">
+                    </div>
+                    <div class="form-group" id="studentIdGroup" style="display: none;">
+                        <label>Student ID</label>
+                        <input type="text" id="signupStudentId" placeholder="If you have a student ID">
+                    </div>
+                    <div class="form-group" id="teacherIdGroup" style="display: none;">
+                        <label>Teacher ID</label>
+                        <input type="text" id="signupTeacherId" placeholder="If you have a teacher ID">
+                    </div>
+                    <div class="form-group" id="parentIdGroup" style="display: none;">
+                        <label>Parent ID</label>
+                        <input type="text" id="signupParentId" placeholder="If you have a parent ID">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                    <button type="button" class="btn btn-secondary" id="backToLoginFromSignup">Back to Login</button>
+                </form>
+                <div id="signupError" class="error-message"></div>
             </div>
         </div>
     </div>
@@ -65,6 +226,21 @@
                 </a>
                 <a href="#" class="nav-item" data-page="fees">
                     <i class="fas fa-dollar-sign"></i> Fees
+                </a>
+                <a href="#" class="nav-item" data-page="parents">
+                    <i class="fas fa-users"></i> Parents
+                </a>
+                <a href="#" class="nav-item" data-page="notifications">
+                    <i class="fas fa-bell"></i> Notifications
+                </a>
+                <a href="#" class="nav-item" data-page="leaves">
+                    <i class="fas fa-calendar-times"></i> Leave Requests
+                </a>
+                <a href="#" class="nav-item" data-page="timetables">
+                    <i class="fas fa-calendar-alt"></i> Timetable
+                </a>
+                <a href="#" class="nav-item" data-page="exams">
+                    <i class="fas fa-clipboard-list"></i> Exams
                 </a>
             </nav>
             <div class="sidebar-footer">
@@ -277,6 +453,108 @@
                             </tr>
                         </thead>
                         <tbody id="feesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Parents Page -->
+            <div id="parentsPage" class="content-page">
+                <div class="table-container">
+                    <table id="parentsTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Parent ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Relationship</th>
+                                <th>Students</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="parentsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Notifications Page -->
+            <div id="notificationsPage" class="content-page">
+                <div class="table-container">
+                    <table id="notificationsTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Type</th>
+                                <th>Priority</th>
+                                <th>Date</th>
+                                <th>Read</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="notificationsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Leaves Page -->
+            <div id="leavesPage" class="content-page">
+                <div class="table-container">
+                    <table id="leavesTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Applicant</th>
+                                <th>Leave Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Days</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leavesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Timetables Page -->
+            <div id="timetablesPage" class="content-page">
+                <div class="table-container">
+                    <table id="timetablesTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Course</th>
+                                <th>Teacher</th>
+                                <th>Day</th>
+                                <th>Time</th>
+                                <th>Room</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="timetablesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Exams Page -->
+            <div id="examsPage" class="content-page">
+                <div class="table-container">
+                    <table id="examsTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Exam Name</th>
+                                <th>Course</th>
+                                <th>Class</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Total Marks</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examsTableBody"></tbody>
                     </table>
                 </div>
             </div>

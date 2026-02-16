@@ -54,6 +54,22 @@ class ApiService {
         return response;
     }
 
+    async registerSchool(schoolData) {
+        return this.request('/auth/register-school', {
+            method: 'POST',
+            body: JSON.stringify(schoolData),
+        });
+    }
+
+    async signup(signupData) {
+        const response = await this.request('/auth/signup', {
+            method: 'POST',
+            body: JSON.stringify(signupData),
+        });
+        this.setToken(response.token);
+        return response;
+    }
+
     // Students
     async getStudents() {
         return this.request('/students');
@@ -236,6 +252,118 @@ class ApiService {
     // Dashboard
     async getDashboardStats() {
         return this.request('/dashboard/stats');
+    }
+
+    // Schools
+    async getSchools() {
+        return this.request('/schools');
+    }
+
+    async getSchoolByCode(code) {
+        return this.request(`/schools/code/${code}`);
+    }
+
+    // Parents
+    async getParents() {
+        return this.request('/parents');
+    }
+
+    async createParent(parent) {
+        return this.request('/parents', {
+            method: 'POST',
+            body: JSON.stringify(parent),
+        });
+    }
+
+    async linkStudentToParent(parentId, studentId) {
+        return this.request(`/parents/${parentId}/link-student`, {
+            method: 'POST',
+            body: JSON.stringify({ studentId }),
+        });
+    }
+
+    // Notifications
+    async getNotifications(recipientId) {
+        return this.request(`/notifications/recipient/${recipientId}`);
+    }
+
+    async getUnreadNotifications(recipientId) {
+        return this.request(`/notifications/recipient/${recipientId}/unread`);
+    }
+
+    async createNotification(notification) {
+        return this.request('/notifications', {
+            method: 'POST',
+            body: JSON.stringify(notification),
+        });
+    }
+
+    async markNotificationAsRead(id) {
+        return this.request(`/notifications/${id}/read`, {
+            method: 'PUT',
+        });
+    }
+
+    // Leaves
+    async getLeaveRequests(applicantId) {
+        return this.request(`/leaves/applicant/${applicantId}`);
+    }
+
+    async getPendingLeaveRequests() {
+        return this.request('/leaves/pending');
+    }
+
+    async createLeaveRequest(leaveRequest) {
+        return this.request('/leaves', {
+            method: 'POST',
+            body: JSON.stringify(leaveRequest),
+        });
+    }
+
+    async approveLeaveRequest(id, approvedById) {
+        return this.request(`/leaves/${id}/approve`, {
+            method: 'PUT',
+            body: JSON.stringify({ approvedById }),
+        });
+    }
+
+    async rejectLeaveRequest(id, approvedById, remarks) {
+        return this.request(`/leaves/${id}/reject`, {
+            method: 'PUT',
+            body: JSON.stringify({ approvedById, remarks }),
+        });
+    }
+
+    // Timetables
+    async getTimetablesByClass(classId) {
+        return this.request(`/timetables/class/${classId}`);
+    }
+
+    async getTimetablesByTeacher(teacherId) {
+        return this.request(`/timetables/teacher/${teacherId}`);
+    }
+
+    async createTimetable(timetable) {
+        return this.request('/timetables', {
+            method: 'POST',
+            body: JSON.stringify(timetable),
+        });
+    }
+
+    // Exams
+    async getExamsByClass(classId) {
+        return this.request(`/exams/class/${classId}`);
+    }
+
+    async getExamsByCourse(courseId) {
+        return this.request(`/exams/course/${courseId}`);
+    }
+
+    async createExam(exam) {
+        return this.request('/exams', {
+            method: 'POST',
+            body: JSON.stringify(exam),
+        });
     }
 }
 

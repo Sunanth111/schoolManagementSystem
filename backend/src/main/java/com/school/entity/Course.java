@@ -32,5 +32,15 @@ public class Course {
 
     @OneToMany(mappedBy = "course")
     private List<Grade> grades;
+
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
+
+    @OneToMany(mappedBy = "course")
+    private List<Timetable> timetables;
+
+    @OneToMany(mappedBy = "course")
+    private List<Exam> exams;
 }
 

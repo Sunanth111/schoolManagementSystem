@@ -48,6 +48,20 @@ public class Teacher {
     )
     private List<Course> courses;
 
+    private String employeeId;
+    private String department;
+    private String designation; // Principal, Vice Principal, Head Teacher, Teacher
+    private Double salary;
+    private String bankAccount;
+    private String photoUrl;
+    private Integer experienceYears;
+    private String previousInstitution;
+    private LocalDate joiningDate;
+    private LocalDate contractStartDate;
+    private LocalDate contractEndDate;
+    private String employmentType; // Full-time, Part-time, Contract
+    private Integer remainingLeaveDays;
+
     private LocalDateTime joinedDate = LocalDateTime.now();
     private boolean active = true;
 }

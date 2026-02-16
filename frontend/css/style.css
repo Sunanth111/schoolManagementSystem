@@ -74,6 +74,37 @@ body {
     font-size: 14px;
 }
 
+.login-footer {
+    margin-top: 20px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.login-footer p {
+    margin: 8px 0;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+.login-card h3 {
+    margin: 20px 0 15px 0;
+    color: var(--text-color);
+    font-size: 18px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 8px;
+}
+
 .form-group {
     margin-bottom: 20px;
 }

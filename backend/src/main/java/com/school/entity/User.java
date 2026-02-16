@@ -30,11 +30,20 @@ public class User {
     private String firstName;
     private String lastName;
     private String phone;
+    
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
+    
     private boolean active = true;
+    private boolean emailVerified = false;
+    private String verificationToken;
+    private LocalDateTime emailVerifiedAt;
+    private LocalDateTime lastLoginAt;
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public enum Role {
-        ADMIN, TEACHER, STUDENT
+        SUPER_ADMIN, ADMIN, TEACHER, STUDENT, PARENT
     }
 }
 

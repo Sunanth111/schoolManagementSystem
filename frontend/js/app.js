@@ -26,6 +26,93 @@ function checkAuth() {
 function showLogin() {
     document.getElementById('loginPage').classList.add('active');
     document.getElementById('appPage').classList.remove('active');
+    document.getElementById('schoolRegistrationPage')?.classList.remove('active');
+    document.getElementById('signupPage')?.classList.remove('active');
+}
+
+function showSchoolRegistration() {
+    document.getElementById('loginPage').classList.remove('active');
+    document.getElementById('schoolRegistrationPage').classList.add('active');
+    document.getElementById('appPage').classList.remove('active');
+    document.getElementById('signupPage')?.classList.remove('active');
+}
+
+function showSignup() {
+    document.getElementById('loginPage').classList.remove('active');
+    document.getElementById('signupPage').classList.add('active');
+    document.getElementById('appPage').classList.remove('active');
+    document.getElementById('schoolRegistrationPage')?.classList.remove('active');
+}
+
+function toggleSignupFields() {
+    const role = document.getElementById('signupRole').value;
+    document.getElementById('studentIdGroup').style.display = role === 'STUDENT' ? 'block' : 'none';
+    document.getElementById('teacherIdGroup').style.display = role === 'TEACHER' ? 'block' : 'none';
+    document.getElementById('parentIdGroup').style.display = role === 'PARENT' ? 'block' : 'none';
+}
+
+async function handleSchoolRegistration(e) {
+    e.preventDefault();
+    const errorDiv = document.getElementById('schoolRegistrationError');
+    
+    try {
+        const schoolData = {
+            schoolName: document.getElementById('schoolName').value,
+            email: document.getElementById('schoolEmail').value,
+            phone: document.getElementById('schoolPhone').value,
+            address: document.getElementById('schoolAddress').value,
+            city: document.getElementById('schoolCity').value,
+            state: document.getElementById('schoolState').value,
+            country: document.getElementById('schoolCountry').value,
+            principalName: document.getElementById('principalName').value,
+            principalEmail: document.getElementById('principalEmail').value,
+            principalPhone: document.getElementById('principalPhone')?.value || '',
+            schoolType: document.getElementById('schoolType').value,
+            adminFirstName: document.getElementById('adminFirstName').value,
+            adminLastName: document.getElementById('adminLastName').value,
+            adminEmail: document.getElementById('adminEmail').value,
+            adminPassword: document.getElementById('adminPassword').value,
+            adminPhone: document.getElementById('adminPhone')?.value || ''
+        };
+
+        const response = await api.registerSchool(schoolData);
+        alert(`School registered successfully!\nSchool Code: ${response.schoolCode}\n\nYou can now login with your admin account.`);
+        showLogin();
+        errorDiv.classList.remove('show');
+    } catch (error) {
+        errorDiv.textContent = error.message || 'Registration failed. Please try again.';
+        errorDiv.classList.add('show');
+    }
+}
+
+async function handleSignup(e) {
+    e.preventDefault();
+    const errorDiv = document.getElementById('signupError');
+    
+    try {
+        const signupData = {
+            email: document.getElementById('signupEmail').value,
+            password: document.getElementById('signupPassword').value,
+            firstName: document.getElementById('signupFirstName').value,
+            lastName: document.getElementById('signupLastName').value,
+            phone: document.getElementById('signupPhone').value,
+            role: document.getElementById('signupRole').value,
+            schoolCode: document.getElementById('signupSchoolCode').value,
+            studentId: document.getElementById('signupStudentId').value || null,
+            teacherId: document.getElementById('signupTeacherId').value || null,
+            parentId: document.getElementById('signupParentId').value || null
+        };
+
+        const response = await api.signup(signupData);
+        currentUser = response;
+        document.getElementById('userName').textContent = response.name;
+        showApp();
+        navigateToPage('dashboard');
+        errorDiv.classList.remove('show');
+    } catch (error) {
+        errorDiv.textContent = error.message || 'Signup failed. Please try again.';
+        errorDiv.classList.add('show');
+    }
 }
 
 function showApp() {
@@ -38,6 +125,21 @@ function setupEventListeners() {
     document.getElementById('loginForm').addEventListener('submit', handleLogin);
     document.getElementById('logoutBtn').addEventListener('click', handleLogout);
 
+    // Registration Forms
+    document.getElementById('showSchoolRegistration')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSchoolRegistration();
+    });
+    document.getElementById('showSignup')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSignup();
+    });
+    document.getElementById('backToLoginFromSchool')?.addEventListener('click', () => showLogin());
+    document.getElementById('backToLoginFromSignup')?.addEventListener('click', () => showLogin());
+    document.getElementById('schoolRegistrationForm')?.addEventListener('submit', handleSchoolRegistration);
+    document.getElementById('signupForm')?.addEventListener('submit', handleSignup);
+    document.getElementById('signupRole')?.addEventListener('change', toggleSignupFields);
+
     // Navigation
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', (e) => {
@@ -48,7 +150,7 @@ function setupEventListeners() {
     });
 
     // Modal
-    document.querySelector('.close').addEventListener('click', closeModal);
+    document.querySelector('.close')?.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => {
         if (e.target.classList.contains('modal')) {
             closeModal();
@@ -143,6 +245,21 @@ function navigateToPage(page) {
             break;
         case 'fees':
             loadFees();
+            break;
+        case 'parents':
+            loadParents();
+            break;
+        case 'notifications':
+            loadNotifications();
+            break;
+        case 'leaves':
+            loadLeaves();
+            break;
+        case 'timetables':
+            loadTimetables();
+            break;
+        case 'exams':
+            loadExams();
             break;
     }
 }
