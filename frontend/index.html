@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>School Management System</h1>
+                    <p>Sign in to continue</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+                <div id="loginError" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="appPage" class="page">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-graduation-cap"></i>
+                <h2>School MS</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-page="students">
+                    <i class="fas fa-user-graduate"></i> Students
+                </a>
+                <a href="#" class="nav-item" data-page="teachers">
+                    <i class="fas fa-chalkboard-teacher"></i> Teachers
+                </a>
+                <a href="#" class="nav-item" data-page="courses">
+                    <i class="fas fa-book"></i> Courses
+                </a>
+                <a href="#" class="nav-item" data-page="classes">
+                    <i class="fas fa-door-open"></i> Classes
+                </a>
+                <a href="#" class="nav-item" data-page="attendance">
+                    <i class="fas fa-calendar-check"></i> Attendance
+                </a>
+                <a href="#" class="nav-item" data-page="grades">
+                    <i class="fas fa-award"></i> Grades
+                </a>
+                <a href="#" class="nav-item" data-page="fees">
+                    <i class="fas fa-dollar-sign"></i> Fees
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="userName">User</span>
+                </div>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1 id="pageTitle">Dashboard</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="addBtn" style="display: none;">
+                        <i class="fas fa-plus"></i> Add New
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Page -->
+            <div id="dashboardPage" class="content-page active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon students">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statStudents">0</h3>
+                            <p>Total Students</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon teachers">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statTeachers">0</h3>
+                            <p>Total Teachers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon courses">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statCourses">0</h3>
+                            <p>Total Courses</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon classes">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statClasses">0</h3>
+                            <p>Total Classes</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon revenue">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statRevenue">$0</h3>
+                            <p>Total Revenue</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon fees">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="statPendingFees">0</h3>
+                            <p>Pending Fees</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Students Page -->
+            <div id="studentsPage" class="content-page">
+                <div class="table-container">
+                    <table id="studentsTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Class</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Teachers Page -->
+            <div id="teachersPage" class="content-page">
+                <div class="table-container">
+                    <table id="teachersTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Teacher ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Qualification</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teachersTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Courses Page -->
+            <div id="coursesPage" class="content-page">
+                <div class="table-container">
+                    <table id="coursesTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Course Code</th>
+                                <th>Course Name</th>
+                                <th>Description</th>
+                                <th>Credits</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="coursesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Classes Page -->
+            <div id="classesPage" class="content-page">
+                <div class="table-container">
+                    <table id="classesTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Section</th>
+                                <th>Capacity</th>
+                                <th>Room Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="classesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Attendance Page -->
+            <div id="attendancePage" class="content-page">
+                <div class="form-section">
+                    <h3>Mark Attendance</h3>
+                    <form id="attendanceForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Class</label>
+                                <select id="attendanceClass" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" id="attendanceDate" required>
+                            </div>
+                        </div>
+                        <div id="attendanceStudentsList"></div>
+                        <button type="submit" class="btn btn-primary">Save Attendance</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Grades Page -->
+            <div id="gradesPage" class="content-page">
+                <div class="table-container">
+                    <table id="gradesTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Marks</th>
+                                <th>Grade</th>
+                                <th>Exam Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gradesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Fees Page -->
+            <div id="feesPage" class="content-page">
+                <div class="table-container">
+                    <table id="feesTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Fee Type</th>
+                                <th>Amount</th>
+                                <th>Paid</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="feesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Forms -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Add New</h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
